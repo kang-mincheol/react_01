@@ -54,6 +54,9 @@ class App extends Component {
 
         <ScrollView
           style={{width: '100%'}}
+          // onMomentumScrollBegin={()=>alert('begin')}
+          // onMomentumScrollEnd={()=>alert('begin')}
+          bounces={false}
         >
           <NumList
             num={this.state.random}

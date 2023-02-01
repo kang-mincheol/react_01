@@ -12,7 +12,9 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 
 const Generator = (props) => {
     return (
-        <View style={styles.generator}>
+        <View
+            style={styles.generator}
+        >
             <Button
                 title="Add Number"
                 onPress={()=>props.add()}
