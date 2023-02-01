@@ -12,7 +12,7 @@ import { View, Text, StyleSheet, TextInput } from 'react-native';
 class Input extends Component {
 
     state = {
-        myTextInput: 'input'
+        myTextInput: ''
     }
 
     onChangeInput = (event) => {

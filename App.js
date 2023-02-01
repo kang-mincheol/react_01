@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { TextInput, Button, View, Text, StyleSheet, ScrollView } from 'react-native';
 import Header from './src/header';
 import Generator from './src/generator';
 import NumList from './src/numlist';
@@ -17,55 +17,54 @@ import Input from './src/input';
 class App extends Component {
 
   state = {
-    appName: 'My First App',
-    random: [36, 999]
+    myTextInput: '',
+    alphabet: ['a', 'b', 'c', 'd']
   }
 
-  onAddRandomNum = () => {
-    const randomNum = Math.floor(Math.random()*100)+1;
-    this.setState(prevState => {
-      return {
-        random: [...prevState.random, randomNum]
-      }
-    })
-  }
-
-  onNumDelete = (position) => {
-    const newArray = this.state.random.filter((num, index) => {
-      return position != index;
-    })
+  onChangeInput = (event) => {
     this.setState({
-      random: newArray
+      myTextInput: event
+    })
+  }
+  
+  onAddTextInput = () => {
+    this.setState(prevState=>{
+      return {
+        myTextInput: '',
+        alphabet: [...prevState.alphabet, prevState.myTextInput]
+      }
     })
   }
 
   render() {
     return (
       <View style={styles.mainView}>
-        {/* <Header name={this.state.appName} />
+        <TextInput
+          value={this.state.myTextInput}
+          style={styles.input}
+          onChangeText={this.onChangeInput}
+          multiline={true}
+          maxLength={100}
+          autoCapitalize={'none'}
+          editable={true}
+        />
+        <Button
+          title="Add TextInput"
+          onPress={this.onAddTextInput}
+        />
 
-        <View>
-          <Text
-            style={styles.mainText}
-            onPress={()=>alert('text touch event')}
-          >Hello World</Text>
-        </View>
-
-        <Generator add={this.onAddRandomNum}/>
-
-        <ScrollView
-          style={{width: '100%'}}
-          // onMomentumScrollBegin={()=>alert('begin')}
-          // onMomentumScrollEnd={()=>alert('begin')}
-          bounces={false}
-        >
-          <NumList
-            num={this.state.random}
-            delete={this.onNumDelete}
-          />
-        </ScrollView> */}
-
-        <Input/>
+        <ScrollView style={{width: '100%'}}>
+          {
+            this.state.alphabet.map((item, idx) => (
+              <Text
+                style={styles.mainText}
+                key={idx}
+              >
+                {item}
+              </Text>
+            ))
+          }
+        </ScrollView>
       </View>
     )
   }
@@ -76,8 +75,7 @@ const styles =  StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     paddingTop: 50,
-    alignItems: 'center',
-    // justifyContent: 'center'
+    alignItems: 'center'
   },
 
   subView: {
@@ -98,7 +96,17 @@ const styles =  StyleSheet.create({
     fontSize: 20,
     fontWeight: 'normal',
     color: 'red',
-    padding: 20
+    padding: 20,
+    margin: 20,
+    backgroundColor: 'pink'
+  },
+
+  input: {
+    width: '100%',
+    backgroundColor: '#cecece',
+    marginTop: 20,
+    fontSize: 25,
+    padding: 10
   }
 })
 
